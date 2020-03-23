@@ -1,0 +1,9 @@
+= f.fields_for :sections, post.sections.build do |ff|
+	.input-group
+		= ff.label :text
+		= ff.text_area :text
+
+		- if ff.object.persisted?
+			.input-group
+				= ff.label :_destroy, 'Delete Section'
+				= ff.check_box :_destroy

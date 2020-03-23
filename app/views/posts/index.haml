@@ -1,0 +1,6 @@
+%h3 All Posts
+- if Category.any?
+	= link_to 'Add new post', new_post_path
+- else
+	%p At least one category is needed to create a New Post
+	= link_to 'Create New Category', new_category_path

@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'posts#index'
+
+  resources :categories
+  resources :posts
+
+  put 'new_post_section/:id', to: 'posts#new_post_section', as: :new_post_section
 end

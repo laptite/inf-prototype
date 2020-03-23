@@ -1,0 +1,5 @@
+var el = document.getElementById('post-form-errors');
+
+<% if post.errors.any? %>
+	el.innerHTML = '<%= j render partial: 'errors', locals: { post: post }, formats: [:html] %>'; 
+<% end %>

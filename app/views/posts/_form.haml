@@ -1,0 +1,38 @@
+- klass = post.persisted? ? "post-form-#{post.id}" : 'new_post_form'
+= form_with model: post, id: klass do |f|
+	#post-form-errors
+
+	.input-group
+		= f.label :category
+		= f.collection_select(:category_id, Category.all, :id, :name, prompt: true)
+
+	.input-group
+		= f.label :author
+		= f.text_field :author
+
+	.input-group
+		= f.label :title
+		= f.text_field :title
+
+	.input-group
+		= f.label :teaser
+		= f.text_area :teaser
+
+	.input-group
+		= f.label :images_credit
+		= f.text_field :images_credit
+	
+	= f.fields_for :sections, post.sections do |ff|
+		%strong Section
+		.input-group
+			= ff.label :text
+			= ff.text_area :text
+
+			.input-group
+				= ff.label :_destroy, 'Delete Section'
+				= ff.check_box :_destroy
+
+	- unless f.object.new_record?
+		= link_to 'Add New Section', new_post_section_path(post), remote: true, method: :put
+
+	= f.submit :save, class: 'btn-submit'
