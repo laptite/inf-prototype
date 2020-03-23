@@ -6,10 +6,13 @@
 		= csp_meta_tag
 		= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 		= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+		= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Archivo+Black&display=swap'
 
 	%body{ class: body_klass }
 		- flash.each do |name, msg|
 			- klass = name == 'notice' ? 'alert-success' : 'alert-info'
 			= content_tag :div, msg, class: "alert #{klass}"
 		
+		= render partial: 'layouts/menu'
 		= yield
+		= render partial: 'layouts/footer'

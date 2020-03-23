@@ -4,5 +4,37 @@
 
 @import 'normalize';
 
-// Global Syles
+// Variables
+$black: black;
+$white: white;
+$menu-height: 50px;
 
+// Global Syles
+aside {
+	position: fixed;
+	bottom: 0;
+}
+.scroll-menu {
+  position: fixed;
+	transform: rotate(-90deg);
+	transform-origin: 0% 0%;
+  background: url('menu.png') repeat 0 0;
+  background-size: auto 50px;
+  height: 50px;
+  min-width: 2560px;
+  width: 100%;
+  margin: 0;
+  animation: scrollText 20s linear infinite;
+
+	@media (min-height: 1024px) {
+		min-width: 1860px;
+  }
+  @media (min-height: 1860px) {
+		min-width: 2125px;
+  }
+}
+
+@-webkit-keyframes scrollText {
+	from { background-position: 0 0; }
+	to { background-position: -935px 0; }
+}

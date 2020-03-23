@@ -42,6 +42,9 @@ class PostsController < ApplicationController
 		redirect_to pics_path, notice: 'Post successfully deleted!'
 	end
 
+	def article
+	end
+
 	private
 
 		def find_post
