@@ -54,6 +54,6 @@ class PostsController < ApplicationController
 		def post_params
 			params.require(:post)
 				.permit(:category_id, :author, :title, :teaser, :images_credit, 
-					:sections, sections_attributes: [:id, :text, :_destroy])
+					:sections, :images, sections_attributes: [:id, :text, :_destroy])
 		end
 end

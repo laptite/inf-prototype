@@ -1,5 +1,5 @@
 - klass = post.persisted? ? "post-form-#{post.id}" : 'new_post_form'
-= form_with model: post, id: klass do |f|
+= form_with model: post, id: klass, multipart: true do |f|
 	#post-form-errors
 
 	.input-group
@@ -22,6 +22,10 @@
 		= f.label :images_credit
 		= f.text_field :images_credit
 	
+	.input-group
+		= f.label "Image"
+		= f.file_field :image
+
 	= f.fields_for :sections, post.sections do |ff|
 		%strong Section
 		.input-group

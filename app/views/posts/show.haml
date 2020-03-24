@@ -5,6 +5,10 @@
 		|
 		= link_to 'Edit Post', edit_post_path(@post)
 		
+		= @post.images.attached?
+		-# @post.images do |image|
+			= image_tag image.image
+		
 		.teaser
 			= @post.category.name
 			= @post.teaser

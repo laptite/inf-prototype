@@ -13,6 +13,6 @@
 			- klass = name == 'notice' ? 'alert-success' : 'alert-info'
 			= content_tag :div, msg, class: "alert #{klass}"
 		
-		= render partial: 'layouts/menu'
-		= yield
-		= render partial: 'layouts/footer'
+		%header= render partial: 'layouts/menu'
+		.page= yield
+		%footer= render partial: 'layouts/footer'
