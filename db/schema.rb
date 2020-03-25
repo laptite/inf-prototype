@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_213404) do
+ActiveRecord::Schema.define(version: 2020_03_24_222426) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,10 +50,32 @@ ActiveRecord::Schema.define(version: 2020_03_24_213404) do
     t.index ["name"], name: "index_collections_on_name"
   end
 
+  create_table "creators", force: :cascade do |t|
+    t.string "name"
+    t.text "bio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "credits", force: :cascade do |t|
+    t.string "kind"
+    t.string "creditable_type", null: false
+    t.integer "creditable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "\"kind\", \"credit\"", name: "index_credits_on_kind_and_credit"
+    t.index ["creditable_type", "creditable_id"], name: "index_credits_on_creditable_type_and_creditable_id"
+  end
+
+  create_table "post_credits", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "credit_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
-    t.string "author"
-    t.string "images_credit"
     t.text "teaser"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
@@ -61,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_213404) do
   end
 
   create_table "sections", force: :cascade do |t|
-    t.text "text"
+    t.text "body"
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

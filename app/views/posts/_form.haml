@@ -23,8 +23,8 @@
 		= f.text_field :images_credit
 	
 	.input-group
-		= f.label "Image"
-		= f.file_field :image
+		= f.label "Images"
+		= f.file_field :images, multiple: true
 
 	= f.fields_for :sections, post.sections do |ff|
 		%strong Section
