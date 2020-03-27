@@ -2,41 +2,64 @@
 = form_with model: post, id: klass, multipart: true do |f|
 	#post-form-errors
 
-	.input-group
-		= f.label :category
-		= f.collection_select(:category_id, Category.all, :id, :name, prompt: true)
-
-	.input-group
-		= f.label :author
-		= f.text_field :author
-
-	.input-group
-		= f.label :title
-		= f.text_field :title
-
-	.input-group
-		= f.label :teaser
-		= f.text_area :teaser
-
-	.input-group
-		= f.label :images_credit
-		= f.text_field :images_credit
-	
-	.input-group
-		= f.label "Images"
-		= f.file_field :images, multiple: true
-
-	= f.fields_for :sections, post.sections do |ff|
-		%strong Section
+	.input-wrapper
 		.input-group
-			= ff.label :text
-			= ff.text_area :text
+			= f.label :category
+			= f.collection_select(:category_id, Category.all, :id, :name, prompt: true)
 
-			.input-group
-				= ff.label :_destroy, 'Delete Section'
-				= ff.check_box :_destroy
+	.input-wrapper
+		.input-group
+			= f.label :title
+			= f.text_field :title
 
-	- unless f.object.new_record?
-		= link_to 'Add New Section', new_post_section_path(post), remote: true, method: :put
+	.input-wrapper
+		.input-group
+			= f.label :teaser
+			= f.text_area :teaser
+	
+	.input-wrapper
+		.input-group
+			= f.label :image
+			= f.file_field :image
+		- if @post.image.attached?
+			= image_tag @post.resize_image(:image, 0.25), class: 'form-img' 
+
+	#post-sections 
+		= render partial: 'posts/sections_form', locals: { f: f, post: post }
+
+	-# post.post_credits.create([{credit: author_credit}, credit: image_credit])
+
+	-#
+		"post" => {
+			"category_id"=>"1", 
+			"title"=>"Factory", 
+			"teaser"=>"Rebecca Drolen’s..."}, 
+		"creator"=>{ "creditable_id"=>"1"}, 
+		"credit_id"=>"1" 
+		}
+	-# %strong= f.label 'Story Credits'
+	-# .input-group
+	-# 	%label= 'Credit'
+	-# 	= collection_select(:creator, :id, Creator.order(name: :asc), :id, :name, prompt: true)
+
+	-# .input-group
+	-# 	%label= "Credit Type"
+	-# 	- options = ['Words', 'Images', 'Video']
+	-# 	= select_tag(:credit_kind, options_for_select(options), prompt: 'Please select')
+	-# = f.fields_for :post_credits, post.post_credits do |ff|
+
+	-# 	.input-group
+	-# 		= ff.label 'Credits'
+	-# 		= ff.text_field :credit_id
+
+	-# 		-# .input-group
+	-# 		-# 	= pc.label :_destroy, 'Delete Credit'
+	-# 		-# 	= pc.check_box :destroy
+
+	=# link_to 'Add New Credit', new_post_credit_path(post), remote: true, method: :put
 
 	= f.submit :save, class: 'btn-submit'
+
+	- unless f.object.new_record?
+		#new_section
+		= link_to 'Add New Section', add_post_section_path(post), remote: true, method: :put

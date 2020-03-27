@@ -1,21 +1,23 @@
 %article
 	%section
-		%h3= @post.title
+		%h3= @post.title.html_safe
 		= "Published: #{@post.updated_at.strftime('%b %d, %Y')}"
 		|
 		= link_to 'Edit Post', edit_post_path(@post)
-
-		- if @post.images.attached?
-			-	@post.images.each do |image|
-				= image_tag(image)
+ 	
+		= image_tag(@post.image) if @post.image.attached?
 		
 		.teaser
 			= link_to "#{@post.category.name}:", category_path(@post.category.id)
-			= @post.teaser
-		.credits
-			%p= "Words: #{@post.author}"
-			%p= "Images: #{@post.images_credit}"
+			= @post.teaser.html_safe
+		-#
+			.credits
+				%p= "Words: #{@post.author}"
+				%p= "Images: #{@post.images_credit}"
 
 	- if @post.sections.any?
 		- @post.sections.each do |section|
-			%p= section.text
+			%section
+				- if section.section_image.attached?
+					= image_tag section.resize_image(:section_image) 
+				%p= section.body.html_safe

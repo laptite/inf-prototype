@@ -1,0 +1,7 @@
+%h3 Creative
+= "Published: #{@creator.updated_at.strftime('%b %d, %Y')}"
+|
+= link_to 'Edit', edit_creator_path(@creator)
+
+%p= @creator.name
+%p= @creator.bio

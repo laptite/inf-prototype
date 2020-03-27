@@ -7,16 +7,34 @@
 @import 'menu';
 
 $menu-height: 50px;
+$black: black;
+$white: white;
 
 // Global Syles
-.page {
-	padding-left: 50px;
-}
+section { @include brand-font-regular; }
+
+img { width: 100%; }
+
+.pl-50 { padding-left: $menu-height; }
+
+.page { padding-left: $menu-height; }
+
 .page-title {
 	text-transform: uppercase;	
-	@include brand-font;
+	@include brand-font-black;
 	font-size: calc(17vw - #{$menu-height});
 	margin: 0;
-	background: black;
-	color: white;
+	background: $black;
+	color: $white;
+}
+
+.category-link { text-transform: uppercase; }
+
+.teaser {
+	@include teaser-font;
+	a { color: $black; }
+}
+
+.form-img {
+	width: 25%;
 }

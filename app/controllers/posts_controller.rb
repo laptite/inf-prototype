@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-	before_action :find_post, only: [:show, :edit, :update, :destroy, :new_post_section]
+	before_action :find_post, only: [:show, :edit, :update, :destroy, :add_post_section]
 
 	def index
-		
+		@posts = Post.order(created_at: :desc)
 	end
 
 	def new
@@ -24,8 +24,8 @@ class PostsController < ApplicationController
 	def edit
 	end
 
-	def new_post_section
-		@new_section = @post.sections.build
+	def add_post_section
+		@post.sections.build
 		respond_to { |format| format.js { render layout: false} }
 	end
 
@@ -52,8 +52,8 @@ class PostsController < ApplicationController
 		end
 
 		def post_params
+			# params[:post][:sections_attributes]["0"][:image]
 			params.require(:post)
-				.permit(:category_id, :title, :teaser, :sections, images: [], 
-					sections_attributes: [:id, :body, :_destroy])
+				.permit(:category_id, :title, :image, :teaser, :sections, :post_credits, sections_attributes: [:id, :section_image, :body, :_destroy], post_credits_attributes: [:id, :post_id, :credit_id, :_destroy])
 		end
 end

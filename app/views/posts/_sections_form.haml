@@ -1,0 +1,17 @@
+= f.fields_for :sections do |section|
+	.input-wrapper
+		%strong Sub-Section
+		.input-group
+			= section.label :body
+			= section.text_area :body
+
+		.input-group
+			= section.label :image
+			= section.file_field :section_image
+		- if section.object.section_image.attached?
+			= image_tag section.object.resize_image(:section_image, 0.25), class: 'form-img', id: "section-#{section.object.id}"
+
+		.input-group
+			= section.label :_destroy, 'Delete Section'
+			= section.check_box :_destroy
+		%br

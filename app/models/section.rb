@@ -1,5 +1,10 @@
 class Section < ApplicationRecord
-	belongs_to :post
+  include ImageHelper
 
-	validates :text, presence: true
+	belongs_to :post, inverse_of: :sections
+	has_one_attached :section_image
+
+	def changed_for_autosave?
+		super || section_image.changed_for_autosave?
+	end
 end
