@@ -1,11 +1,6 @@
 # SEED FILE -- Test Content
-author = Creator.create(name: 'Rebecca Drolen', bio: 'Rebecca Drolen is an artist and educator currently working in Arkansas.')
-photographer = Creator.create(name: 'Emma de Clercq', bio: 'Emma de Clercq is a writer and Editor of INFRINGE.')
-author_credit = author.credits.create(kind: 'Words')
-image_credit = photographer.credits.create(kind: 'Images')
 category = Category.create(name: 'Art + Culture')
 post = category.posts.create(title: 'Factory', teaser: 'Rebecca Drolen’s Factory series explores the body and hair as a source of protection')
-post.post_credits.create([{credit: author_credit}, credit: image_credit])
 post.sections.create([
 	{ body: 'Having previously explored our contradictory relationship with our hair, Rebecca Drolen’s new series Factory once again sees the photographer using the fibre to highlight themes of power, fetishisation and conflicting beauty ideals.'},
 	{ body: 'While the surreal scenes in Hair Pieces looked at the “bizarre social contexts of hair, and our visceral response when it is found out place,” Factory takes this idea one step further. In this ongoing series, the photographer depicts a factory-like setting in which hair, nails, and teeth are added to the body, rather than removed. “The figures in the images are building their defences,” Drolen explains. “Much like a shaved animal would be vulnerable in the wild, I attempt to humorously consider how the body itself can be increased as a means of protection within a society obsessed with hairless women.” 
@@ -15,3 +10,8 @@ At first glance, the imagery appears light and playful, a disarming quality whic
 Rebecca Drolen'},
 	{ body: 'Drolen’s starting ground for the project was a popular meme depicting women’s tights made to resemble hairy legs. The tongue-in-cheek tagline “Discourage any potential perverts,” is followed with “Once the guys lay eyes on your shapely and excessively hairy stems, they won’t even bother giving you a second glance – unless they’re into that sort of thing.” Drolen shows how revealing this is in illustrating ingrained attitudes towards women’s bodies, highlighting “the troubling narrative that a woman’s body hair is repulsive, unless fetishized”.'}
 ])
+author = Contributor.create(name: 'Rebecca Drolen', bio: 'Rebecca Drolen is an artist and educator currently working in Arkansas.')
+photographer = Contributor.create(name: 'Emma de Clercq', bio: 'Emma de Clercq is a writer and Editor of INFRINGE.')
+author.credits.create(name: 'Words')
+photographer.credits.create(name: 'Images')
+post.post_contributors.create([{contributor: author}, {contributor: photographer}])

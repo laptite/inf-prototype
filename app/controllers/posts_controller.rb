@@ -30,6 +30,8 @@ class PostsController < ApplicationController
 	end
 
 	def update
+		# FIXME--post_contributors not getting destroyed
+	byebug
 		if @post.update(post_params)
 			redirect_to @post, notice: 'Post successfully updated!'
 		else
@@ -52,8 +54,12 @@ class PostsController < ApplicationController
 		end
 
 		def post_params
-			# params[:post][:sections_attributes]["0"][:image]
 			params.require(:post)
-				.permit(:category_id, :title, :image, :teaser, :sections, :post_credits, sections_attributes: [:id, :section_image, :body, :_destroy], post_credits_attributes: [:id, :post_id, :credit_id, :_destroy])
+				.permit([
+					:category_id, :title, :image, :teaser, :sections, 
+					contributors: [:id, :name],
+					sections_attributes: [:id, :section_image, :body, :_destroy], 
+					post_contributors_attributes: [:id, :post_id, :contributor_id, :_destroy]
+				])
 		end
 end

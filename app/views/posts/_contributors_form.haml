@@ -1,0 +1,10 @@
+= f.fields_for :post_contributors, include_id: false do |ff|
+	.input-group
+		= ff.label 'Post Contributors'
+		= ff.collection_select(:contributor_id, Contributor.order(name: :asc), :id, :name, { prompt: true })
+
+		- if ff.object.present?
+			= ff.label :_destroy, 'Remove Credit'
+			= ff.check_box :_destroy
+
+		= ff.hidden_field :contributor_id, name: "post[post_contributors_attributes][#{ff.options[:child_index]}][contributor_id]", value: ff.object.contributor_id

@@ -1,0 +1,7 @@
+%h3 Contributor
+= "Published: #{@contributor.updated_at.strftime('%b %d, %Y')}"
+|
+= link_to 'Edit', edit_contributor_path(@contributor)
+
+%p= @contributor.name
+%p= @contributor.bio

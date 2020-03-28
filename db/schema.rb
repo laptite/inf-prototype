@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_222426) do
+ActiveRecord::Schema.define(version: 2020_03_27_220607) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 2020_03_24_222426) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -50,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_222426) do
     t.index ["name"], name: "index_collections_on_name"
   end
 
-  create_table "creators", force: :cascade do |t|
+  create_table "contributors", force: :cascade do |t|
     t.string "name"
     t.text "bio"
     t.datetime "created_at", precision: 6, null: false
@@ -58,18 +70,17 @@ ActiveRecord::Schema.define(version: 2020_03_24_222426) do
   end
 
   create_table "credits", force: :cascade do |t|
-    t.string "kind"
+    t.string "name"
     t.string "creditable_type", null: false
     t.integer "creditable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"kind\", \"credit\"", name: "index_credits_on_kind_and_credit"
     t.index ["creditable_type", "creditable_id"], name: "index_credits_on_creditable_type_and_creditable_id"
   end
 
-  create_table "post_credits", force: :cascade do |t|
+  create_table "post_contributors", force: :cascade do |t|
     t.integer "post_id"
-    t.integer "credit_id"
+    t.integer "contributor_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

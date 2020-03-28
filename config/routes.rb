@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  
+  get '/admin', to: 'admins#index', as: :admin_dashboard
   root 'posts#index'
 
   resources :categories
-  resources :creators
+  resources :contributors
   resources :posts do
   	resources :sections
   end
