@@ -14,4 +14,4 @@ author = Contributor.create(name: 'Rebecca Drolen', bio: 'Rebecca Drolen is an a
 photographer = Contributor.create(name: 'Emma de Clercq', bio: 'Emma de Clercq is a writer and Editor of INFRINGE.')
 author.credits.create(name: 'Words')
 photographer.credits.create(name: 'Images')
-post.post_contributors.create([{contributor: author}, {contributor: photographer}])
+post.post_contributors.create(contributor: photographer)
