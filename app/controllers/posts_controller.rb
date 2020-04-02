@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-	before_action :find_post, only: [:show, :edit, :update, :destroy, :add_post_section]
+	before_action :find_post, only: [
+		:show, :edit, :update, :destroy, :add_post_section, :add_post_credit]
+	before_action :authenticate_admin!, only: [:edit]
 
 	def index
 		@posts = Post.order(created_at: :desc)
@@ -24,14 +26,8 @@ class PostsController < ApplicationController
 	def edit
 	end
 
-	def add_post_section
-		@post.sections.build
-		respond_to { |format| format.js { render layout: false} }
-	end
-
 	def update
-		# FIXME--post_contributors not getting destroyed
-	byebug
+		# @post.post_contributors.build
 		if @post.update(post_params)
 			redirect_to @post, notice: 'Post successfully updated!'
 		else
@@ -42,9 +38,6 @@ class PostsController < ApplicationController
 	def destroy
 		@pic.destroy
 		redirect_to pics_path, notice: 'Post successfully deleted!'
-	end
-
-	def article
 	end
 
 	private

@@ -7,18 +7,132 @@
 @import 'menu';
 
 $menu-height: 50px;
+$header-height: 70px;
 $black: black;
+$btn-purple: #4242a0;
 $white: white;
 
 // Global Syles
-section { @include brand-font-regular; }
+* { box-sizing: border-box; }
+
+article > section { @include brand-font-regular; }
 
 img { width: 100%; }
 
-.pl-50 { padding-left: $menu-height; }
+table { border-collapse: collapse; }
+th { background: #fafad2; font-weight: 600; padding: 3px 0; }
+th, td {
+	border-collapse: collapse;
+	border: solid 0.25px lightgray;
+	line-height: 1.5;
+	padding: 0 10px;
+}
+a { color: $black; }
 
+.posts-edit {
+	@include form-font;
+	background: #E9E9E9;
+
+	h3 {
+		font-size: 1.75em; text-align: center; text-transform: uppercase; 
+		box-shadow: 10px 0 5px #a9a9a9; background: white;
+		padding: 0.5em 0; margin: 0; position: fixed;
+		width: calc(100% - #{$menu-height});
+	}
+}
+
+form {
+	@include form-font;
+	display: flex;
+	flex-direction: column;
+  margin: 0 auto;
+  background: #fffdea;
+  padding: 1em 2em 2em;
+	width: 70%;
+	max-width: 900px;
+	padding: $header-height 1.25em 2em;
+	&:focus { outline: none; }
+  @media (max-width: 1024px) { width: 80%; }
+  @media (max-width: 700px) { width: 100%; }
+
+	*:focus { outline-color: #4242a0; }
+
+	h4 { margin: 0.75em 0; }
+
+  .btn {
+		text-decoration: none;
+		text-transform: uppercase;
+		padding: 0.3em 0.75em;
+		font-weight: 300;
+		background: $btn-purple;
+		color: white;
+		border: none;
+		border-radius: 3px;
+		max-height: 2em;
+		margin-bottom: 1em;
+		&:hover { background: #5858d2; }
+		&:focus { outline-color: none; }
+	}
+	.btn-submit { flex: 0 0 250px; }
+	.btn-wrapper {
+		display: flex; justify-content: flex-end;
+		@media (max-width: 414px) { justify-content: center; }
+	}
+	.btn-link {
+		flex-direction: row-reverse;
+		min-width: 200px; text-align: center;
+	}
+	.form-img { width: 25%; }
+	.form-group {
+		ul { list-style: none; margin: 0 0 1.5em; padding: 0; }
+		li { margin-bottom: 0.5em; }
+		h4 { font-size: 1.5em; border-bottom: 1px solid gray; }
+		.check-right {
+			font-size: 0.78em; flex-direction: row-reverse; text-align: right;
+			label { padding: 0 0.5em; color: darkred;}
+		}
+	}
+	.form-fields {
+		li { display: flex; flex-wrap: wrap; }
+		label { flex: 1 0 90px; max-width: 120px; }
+		select { height: 2em; min-width: 200px; }
+
+		input[type=text],
+		textarea,
+		select {
+			overflow: hidden;
+			text-overflow: ellipses;
+			white-space: nowrap;
+			text-decoration: none;
+			padding: 0.5em 0.75em;
+			border: none;
+			background: #ededff;
+			flex: 1 0 230px;
+			max-height: 3em; // opera bug hedge
+		}
+		textarea {
+			display: block; width: 90%; white-space: initial; height: 6em;
+			overflow: auto; line-height: normal; min-height: 150px;
+			@media (max-width: 414px) { width: 100%; }
+		}
+	}
+	.form-submit { display: flex; flex-wrap: wrap; justify-content: center; }
+	.form-title { font-weight: 600; text-align: center; margin: 0.75em 0; }
+	.header-title { color: $btn-purple; }
+}
+
+.action-links { font-size: 0.75em; }
+.alert {
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 1em;
+  padding: 3px 0;
+  line-height: 1em;
+  color: white;
+}
+.alert-success { background: #4CAF50; }
+.category-link { text-transform: uppercase; }
 .page { padding-left: $menu-height; }
-
 .page-title {
 	text-transform: uppercase;	
 	@include brand-font-black;
@@ -27,14 +141,5 @@ img { width: 100%; }
 	background: $black;
 	color: $white;
 }
-
-.category-link { text-transform: uppercase; }
-
-.teaser {
-	@include teaser-font;
-	a { color: $black; }
-}
-
-.form-img {
-	width: 25%;
-}
+.pl-50 { padding-left: $menu-height; }
+.teaser { @include teaser-font; }

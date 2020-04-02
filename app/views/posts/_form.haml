@@ -1,36 +1,37 @@
-- klass = post.persisted? ? "post-form-#{post.id}" : 'new_post_form'
+- klass = post.persisted? ? "post_form_#{post.id}" : 'new_post_form'
 = form_with model: post, id: klass, multipart: true do |f|
 	#post-form-errors
+	%section.form-group
+		%h4.header-title Teaser
+		%ul.form-fields#post-attributes
+			%li
+				= f.label :category
+				= f.collection_select(:category_id, Category.all, :id, :name, prompt: true)
+			%li
+				= f.label :title
+				= f.text_field :title
+			%li
+				= f.label :teaser
+				= f.text_area :teaser, rows: 6
+			%li
+				= f.label :image
+				= f.file_field :image
+				- if @post.image.attached?
+					= image_tag @post.resize_image(:image, 0.25), class: 'form-img'
 
-	.input-group
-		= f.label :category
-		= f.collection_select(:category_id, Category.all, :id, :name, prompt: true)
+	%section.form-group
+		%h4.header-title Sections
+		#post-sections
+			= f.fields_for :sections do |section|
+				= render 'section_fields', f: section
+			= link_to_add_fields 'Add New Section', f, :sections
 
-	.input-group
-		= f.label :title
-		= f.text_field :title
+	%section.form-group
+		%h4.header-title Credits
+		%ul.form-fields#post-credits
+			= f.fields_for :post_contributors do |contributor|
+				= render 'post_contributor_fields', f: contributor
+			= link_to_add_fields 'Add New Credit', f, :post_contributors
 
-	.input-group
-		= f.label :teaser
-		= f.text_area :teaser
-		
-	.input-group
-		= f.label :image
-		= f.file_field :image
-	- if @post.image.attached?
-		= image_tag @post.resize_image(:image, 0.25), class: 'form-img' 
-
-	#post-sections 
-		= render partial: 'posts/sections_form', locals: { f: f, post: post }
-
-	#credits 
-		%strong Assign Credits
-		= render partial: 'posts/contributors_form', locals: { f: f, post: post }
-
-		=# link_to 'Add New Credit', new_post_credit_path(post), remote: true, method: :put
-
-	= f.submit :save, class: 'btn-submit'
-
-	- unless f.object.new_record?
-		#new_section
-		= link_to 'Add New Section', add_post_section_path(post), remote: true, method: :put
+	%section.form-submit
+		= f.submit "Save", class: 'btn btn-submit'

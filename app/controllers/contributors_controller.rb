@@ -2,7 +2,7 @@ class ContributorsController < ApplicationController
 	before_action :find_contributor, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@contributor = Contributor.all
+		@contributors = Contributor.all
 	end
 
 	def new

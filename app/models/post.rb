@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   include ImageHelper
 	belongs_to :category
 	has_many :sections, dependent: :destroy
-	has_many :post_contributors, dependent: :destroy
+	has_many :post_contributors, dependent: :destroy, inverse_of: :post
 	has_many :contributors, through: :post_contributors
 	
 	has_one_attached :image

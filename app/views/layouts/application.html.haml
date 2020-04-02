@@ -4,11 +4,13 @@
 		%title Prototype
 		= csrf_meta_tags
 		= csp_meta_tag
+		%meta{ content:'width=device-width, initial-scale=1, minimum-scale=1', name: 'viewport' }
 		= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 		= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 		= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Archivo+Black&display=swap'
 		= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Archivo&display=swap'
 		= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Cormorant&display=swap'
+		= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato&display=swap'
 
 	%body{ class: body_klass }
 		- flash.each do |name, msg|

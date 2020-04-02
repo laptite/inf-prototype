@@ -1,0 +1,16 @@
+%ul.form-fields{ class: 'nested-fields' }
+	.form-title
+		Sub-Section #
+		= f.options[:child_index] + 1
+	%li.check-right
+		= f.hidden_field :_destroy
+		= link_to('Remove Section', '#', class: 'remove_fields')
+	%li
+		= f.label :body
+		= f.text_area :body
+	%li
+		= f.label :image
+		= f.file_field :section_image
+		
+		- if f.object.section_image.attached?
+			= image_tag f.object.resize_image(:section_image, 0.25), class: 'form-img', id: "section-#{f.object.id}"
