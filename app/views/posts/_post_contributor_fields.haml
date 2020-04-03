@@ -1,10 +1,7 @@
--#
-	Cannot add new post_contributor. Need to find or create by.
-	Couldn't find PostContributor with ID=1 for Post with ID=1
-
-- if f.object.present?
-	%li.check-right
-		= f.hidden_field :_destroy
-		= link_to "Remove Credit", '#', class: "remove_fields"
-%li
-	= f.collection_select(:id, Contributor.order(name: :asc), :id, :name, { prompt: true })
+%ul.form-fields{ class: 'nested-fields' }
+	- if f.object.present?
+		%li.check-right
+			= f.hidden_field :_destroy
+			= link_to "Remove Credit", '#', class: "remove_fields"
+	%li
+		= f.collection_select(:contributor_id, Contributor.order(name: :asc), :id, :name, { prompt: true })

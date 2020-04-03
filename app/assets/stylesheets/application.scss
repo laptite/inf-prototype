@@ -17,6 +17,8 @@ $white: white;
 
 article > section { @include brand-font-regular; }
 
+section { padding-bottom: 10px; }
+
 img { width: 100%; }
 
 table { border-collapse: collapse; }
@@ -28,6 +30,38 @@ th, td {
 	padding: 0 10px;
 }
 a { color: $black; }
+
+.marquee-wrapper {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  background: $black;
+
+	.page-title {
+		font-size: 350px;
+		letter-spacing: -10px;
+		line-height: 0.85em;
+  }
+}
+.marquee {
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+
+.portrait {
+	display: flex; flex-wrap: wrap;
+	> div {
+		width: 50%;
+		@media (max-width: 768px) { width: 100%; }
+	}
+	p { font-size: calc(16px + 1.85vw); padding: 0 10px; margin: 0; }
+}
+
+/* Make it move */
+@keyframes marquee {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
 
 .posts-edit {
 	@include form-font;
@@ -142,4 +176,6 @@ form {
 	color: $white;
 }
 .pl-50 { padding-left: $menu-height; }
-.teaser { @include teaser-font; }
+.teaser, .credits { @include teaser-font; }
+.teaser { padding-bottom: 10px; }
+.credits p { font-size: 0.7em; margin: 0; line-height: 1em }

@@ -8,6 +8,13 @@ module ImageHelper
     return processed
   end
 
+  def orientation_klass(key)
+     return unless self.send(key).attached?
+     width = self.send(key).blob.metadata[:width]
+     height = self.send(key).blob.metadata[:height]
+     width > height ? "landscape" : "portrait"
+  end
+
   private
 
     def image_options(key, pixel)

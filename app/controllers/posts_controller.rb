@@ -27,7 +27,6 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		# @post.post_contributors.build
 		if @post.update(post_params)
 			redirect_to @post, notice: 'Post successfully updated!'
 		else
@@ -50,7 +49,6 @@ class PostsController < ApplicationController
 			params.require(:post)
 				.permit([
 					:category_id, :title, :image, :teaser, :sections, 
-					contributors: [:id, :name],
 					sections_attributes: [:id, :section_image, :body, :_destroy], 
 					post_contributors_attributes: [:id, :post_id, :contributor_id, :_destroy]
 				])

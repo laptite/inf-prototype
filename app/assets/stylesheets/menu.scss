@@ -22,7 +22,7 @@ aside {
   }
 }
 
-@-webkit-keyframes scrollText {
+@keyframes scrollText {
 	from { background-position: 0 0; }
 	to { background-position: -935px 0; }
 }
