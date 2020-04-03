@@ -54,7 +54,13 @@ a { color: $black; }
 		width: 50%;
 		@media (max-width: 768px) { width: 100%; }
 	}
-	p { font-size: calc(16px + 1.85vw); padding: 0 10px; margin: 0; }
+	p { 
+		font-size: 1.85vw; padding: 0 10px; margin: 0; 
+		@media (max-width: 768px) { 
+			width: 100%; 
+			font-size: calc(16px + 1.85vw)
+		}
+	}
 }
 
 /* Make it move */
