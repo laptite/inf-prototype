@@ -12,7 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'haml', '~> 5.1'
 gem 'devise', '~> 4.7'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
